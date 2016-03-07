@@ -4,6 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Created by criss on 3/5/16.
@@ -33,6 +34,17 @@ public class TestTemplate {
     private void assertTemplateEvaluatesTo(String expected) {
         assertEquals(expected, template.evaluate());
     }
+
+    @Test
+    public void missingValuesRaisesException() throws Exception {
+        try {
+            new Template("${foo}").evaluate();
+            fail("evaluate( should throws an exception if a variable is left without a value)");
+        } catch(MissingValueException e) {
+
+        }
+    }
+
 }
 
 
