@@ -2,6 +2,8 @@ package com.cristi.tdd;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by criss on 3/5/16.
@@ -27,8 +29,9 @@ public class Template {
     }
 
     private void checkForMissingValues(String result) {
-        if(result.matches(".*\\$\\{.+\\}.*")) {
-            throw new MissingValueException();
+        Matcher m = Pattern.compile("\\$\\{.+\\}").matcher(result);
+        if(m.find()) {
+            throw new MissingValueException("no value for " + m.group());
         }
 
     }

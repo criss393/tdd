@@ -40,8 +40,8 @@ public class TestTemplate {
         try {
             new Template("${foo}").evaluate();
             fail("evaluate( should throws an exception if a variable is left without a value)");
-        } catch(MissingValueException e) {
-
+        } catch(MissingValueException expected) {
+            assertEquals("no value for ${foo}", expected.getMessage());
         }
     }
 
